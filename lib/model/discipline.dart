@@ -1,19 +1,18 @@
-import 'package:agenda_de_estudos/model/content.dart';
-
 class Discipline {
   String name;
   String icon;
-  List<Content>? contents;
+  int numberOfContents;
   Discipline({
     required this.name,
-    this.icon = "other",
-    this.contents,
+    required this.icon,
+    this.numberOfContents = 0,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
       'icon': icon,
+      'numberOfContents': numberOfContents,
     };
   }
 
@@ -21,6 +20,7 @@ class Discipline {
     return Discipline(
       name: map['name'] as String,
       icon: map['icon'] as String,
+      numberOfContents: map['numberOfContents'] as int,
     );
   }
 }

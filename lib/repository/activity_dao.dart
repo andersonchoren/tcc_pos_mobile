@@ -12,7 +12,7 @@ class ActivityDAO {
         await db.execute(
             'CREATE TABLE contents (id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT, initialHour TEXT, endHour TEXT, days TEXT, discipline TEXT)');
         await db.execute(
-            'CREATE TABLE disciplines (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,icon TEXT)');
+            'CREATE TABLE disciplines (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,icon TEXT,numberOfContents INTEGER)');
       },
     );
     return database;

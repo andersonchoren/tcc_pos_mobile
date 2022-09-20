@@ -1,39 +1,59 @@
 import 'package:agenda_de_estudos/model/content.dart';
+import 'package:agenda_de_estudos/model/discipline.dart';
+import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/content_details/components/list_item.dart';
 import 'package:flutter/material.dart';
 
 class ContentDetails extends StatelessWidget {
-  List<Content>? contents;
-  String icon;
-  String disciplineName;
+  Discipline discipline;
   ContentDetails({
     super.key,
-    required this.icon,
-    required this.disciplineName,
-    this.contents,
+    required this.discipline,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meus estudos de $disciplineName"),
+        title: Text("Meus estudos de ${discipline.name}"),
       ),
       body: Container(
         margin: const EdgeInsets.all(16),
-        child: (contents != null)
-            ? ListView.builder(
+        child: FutureBuilder(
+          future: ContentRepository.findContent(discipline),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+
+            if (snapshot.data != null && snapshot.data!.isNotEmpty) {
+              return ListView.builder(
                 itemBuilder: (context, index) {
                   return ListItem(
-                    icon: icon,
-                    content: contents![index],
+                    icon: discipline.icon,
+                    content: Content.fromMap(snapshot.data!.elementAt(index)),
                   );
                 },
-                itemCount: contents?.length,
-              )
-            : const Center(
-                child: Text("Não existem conteúdos"),
-              ),
+                itemCount: snapshot.data!.length,
+              );
+            } else {
+              return SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: const Center(
+                  child: Text(
+                      "Não existem conteúdos cadastrados nessa disciplina"),
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }

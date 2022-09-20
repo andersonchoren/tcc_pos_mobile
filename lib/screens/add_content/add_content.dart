@@ -142,6 +142,7 @@ class _AddContentState extends State<AddContent> {
             days: prepareDaysOfWeek(checkboxs),
             initialHour: initialHourInput.inputController.text,
             endHour: endHourInput.inputController.text,
+            discipline: discipline,
           );
 
           try {

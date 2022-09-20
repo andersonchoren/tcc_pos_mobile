@@ -36,9 +36,7 @@ class ListItem extends StatelessWidget {
                       ),
                       Chip(
                         label: Text(
-                          (discipline.contents != null)
-                              ? "${convertNumber(discipline.contents!.length)} conteúdos"
-                              : "0 conteúdos",
+                          "0 conteúdos",
                           style:
                               Theme.of(context).textTheme.subtitle2?.copyWith(
                                     color: Colors.white,
@@ -60,9 +58,7 @@ class ListItem extends StatelessWidget {
                     MaterialPageRoute(
                       builder: ((context) {
                         return ContentDetails(
-                          icon: discipline.icon,
-                          contents: discipline.contents,
-                          disciplineName: discipline.name,
+                          discipline: discipline,
                         );
                       }),
                     ),

@@ -1,16 +1,16 @@
-import 'dart:convert';
-
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Content {
   String title;
   String days;
   String initialHour;
   String endHour;
+  String discipline;
   Content({
     required this.title,
     required this.days,
     required this.initialHour,
     required this.endHour,
+    required this.discipline,
   });
 
   Map<String, dynamic> toMap() {
@@ -19,6 +19,7 @@ class Content {
       'days': days,
       'initialHour': initialHour,
       'endHour': endHour,
+      'discipline': discipline,
     };
   }
 
@@ -28,6 +29,7 @@ class Content {
       days: map['days'] as String,
       initialHour: map['initialHour'] as String,
       endHour: map['endHour'] as String,
+      discipline: map['discipline'] as String,
     );
   }
 }
