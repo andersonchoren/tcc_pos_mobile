@@ -36,7 +36,9 @@ class ListItem extends StatelessWidget {
                       ),
                       Chip(
                         label: Text(
-                          "${discipline.numberOfContents} conteúdos",
+                          (discipline.numberOfContents > 1)
+                              ? "${discipline.numberOfContents} conteúdos"
+                              : "${discipline.numberOfContents} conteúdo",
                           style:
                               Theme.of(context).textTheme.subtitle2?.copyWith(
                                     color: Colors.white,
