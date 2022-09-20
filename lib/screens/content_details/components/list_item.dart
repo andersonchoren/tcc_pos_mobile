@@ -91,7 +91,7 @@ class ListItem extends StatelessWidget {
                       width: 8,
                     ),
                     Text(
-                      content.hour,
+                      "Das ${content.initialHour} até às ${content.endHour} ",
                     ),
                   ],
                 ),

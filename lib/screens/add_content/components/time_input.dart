@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class TimeInput extends StatefulWidget {
   String title;
+  final inputController = TextEditingController();
   TimeInput({
     super.key,
     required this.title,
@@ -12,7 +13,6 @@ class TimeInput extends StatefulWidget {
 }
 
 class _TimeInputState extends State<TimeInput> {
-  final inputController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,7 +26,7 @@ class _TimeInputState extends State<TimeInput> {
           children: [
             Expanded(
               child: TextFormField(
-                controller: inputController,
+                controller: widget.inputController,
                 enabled: false,
               ),
             ),
@@ -38,7 +38,7 @@ class _TimeInputState extends State<TimeInput> {
                   initialTime: TimeOfDay.now(),
                 );
                 if (time != null) {
-                  inputController.text = "${time.hour}:${time.minute}";
+                  widget.inputController.text = "${time.hour}:${time.minute}";
                 }
               },
             )

@@ -1,6 +1,8 @@
+import 'package:agenda_de_estudos/model/content.dart';
 import 'package:agenda_de_estudos/model/day_of_week.dart';
 import 'package:agenda_de_estudos/model/form_validation.dart';
 import 'package:agenda_de_estudos/model/list_of_disciplines.dart';
+import 'package:agenda_de_estudos/model/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/add_content/components/time_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,6 +18,8 @@ class _AddContentState extends State<AddContent> {
   var itemSelected = list_of_disciplines[0];
   var contentController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+  var initialHourInput = TimeInput(title: "Inicia ás");
+  var endHourInput = TimeInput(title: "Termina ás");
   var checkboxs = [
     DayOfWeek(title: "Seg"),
     DayOfWeek(title: "Ter"),
@@ -86,9 +90,9 @@ class _AddContentState extends State<AddContent> {
                 padding: const EdgeInsets.symmetric(
                   vertical: 16,
                 ),
-                child: TimeInput(title: "Inicia ás"),
+                child: initialHourInput,
               ),
-              TimeInput(title: "Termina ás"),
+              endHourInput,
               const Padding(
                 padding: EdgeInsets.only(top: 16, bottom: 8),
                 child: Text("Dias da semana"),
@@ -131,11 +135,38 @@ class _AddContentState extends State<AddContent> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          var content = Content(
+            title: contentController.text,
+            days: prepareDaysOfWeek(checkboxs),
+            initialHour: initialHourInput.inputController.text,
+            endHour: endHourInput.inputController.text,
+          );
+
+          try {
+            ContentRepository.insertContent(content.toMap());
+            var snack = const SnackBar(
+                content: Text("Conteúdo registrado com sucesso!!!"));
+            ScaffoldMessenger.of(context).showSnackBar(snack);
+          } catch (exception) {
+            var snack =
+                const SnackBar(content: Text("Houve um erro inesperado!!!"));
+            ScaffoldMessenger.of(context).showSnackBar(snack);
+          }
+        },
         child: const Icon(Icons.save),
       ),
     );
   }
+}
+
+String prepareDaysOfWeek(List<DayOfWeek> daysOfWeek) {
+  return daysOfWeek
+      .where((day) => day.isActive)
+      .map((e) => e.title)
+      .toString()
+      .replaceAll("(", "")
+      .replaceAll(")", "");
 }
 
 String findIcon(String discipline) {

@@ -1,11 +1,33 @@
+import 'dart:convert';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Content {
   String title;
   String days;
-  String hour;
+  String initialHour;
+  String endHour;
   Content({
     required this.title,
     required this.days,
-    required this.hour,
+    required this.initialHour,
+    required this.endHour,
   });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'title': title,
+      'days': days,
+      'initialHour': initialHour,
+      'endHour': endHour,
+    };
+  }
+
+  factory Content.fromMap(Map<String, dynamic> map) {
+    return Content(
+      title: map['title'] as String,
+      days: map['days'] as String,
+      initialHour: map['initialHour'] as String,
+      endHour: map['endHour'] as String,
+    );
+  }
 }

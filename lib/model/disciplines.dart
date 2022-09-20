@@ -9,12 +9,14 @@ final List<Discipline> disciplines = [
       Content(
         title: "Tipos de ligação",
         days: "Segundas e Quartas",
-        hour: "Das 15:00 até às 16:00",
+        initialHour: "15:00",
+        endHour: "15:00",
       ),
       Content(
         title: "Gases nobres",
         days: "Terças e Quintas",
-        hour: "Das 15:00 até às 16:00",
+        initialHour: "15:00",
+        endHour: "15:00",
       ),
     ],
   ),
