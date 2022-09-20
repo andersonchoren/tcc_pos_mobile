@@ -62,7 +62,9 @@ class ContentDetails extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: ((context) {
-                return const AddContent();
+                return AddContent(
+                  discipline: discipline.name,
+                );
               }),
             ),
           );

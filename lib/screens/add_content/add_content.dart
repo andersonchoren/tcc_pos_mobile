@@ -9,14 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AddContent extends StatefulWidget {
-  const AddContent({super.key});
+  String discipline;
+  AddContent({
+    super.key,
+    required this.discipline,
+  });
 
   @override
   State<AddContent> createState() => _AddContentState();
 }
 
 class _AddContentState extends State<AddContent> {
-  var discipline = list_of_disciplines[0];
   var contentController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   var initialHourInput = TimeInput(title: "Inicia ás");
@@ -63,40 +66,6 @@ class _AddContentState extends State<AddContent> {
                     return validateContentName(value!);
                   }),
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 16, bottom: 8),
-                child: Text("Disciplina"),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              DropdownButton(
-                value: discipline,
-                isExpanded: true,
-                items: list_of_disciplines.map((String item) {
-                  return DropdownMenuItem(
-                    value: item,
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          "assets/icons/${findIcon(item)}.svg",
-                          height: 24,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(item),
-                      ],
-                    ),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    discipline = newValue!;
-                    icon = findIcon(newValue);
-                  });
-                },
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -153,11 +122,11 @@ class _AddContentState extends State<AddContent> {
             days: prepareDaysOfWeek(checkboxs),
             initialHour: initialHourInput.inputController.text,
             endHour: endHourInput.inputController.text,
-            discipline: discipline,
+            discipline: widget.discipline,
           );
 
           try {
-            ContentRepository.insertContent(content.toMap(), discipline);
+            ContentRepository.insertContent(content.toMap(), widget.discipline);
             var snack = const SnackBar(
                 content: Text("Conteúdo registrado com sucesso!!!"));
             ScaffoldMessenger.of(context).showSnackBar(snack);
