@@ -4,5 +4,6 @@ var list_of_disciplines = [
   'Matemática',
   'Português',
   'Química',
-  'Música'
+  'Música',
+  'Outra',
 ];

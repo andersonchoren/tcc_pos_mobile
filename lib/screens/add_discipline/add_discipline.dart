@@ -65,16 +65,18 @@ class _AddDisciplineState extends State<AddDiscipline> {
                 items: list_of_disciplines.map((String item) {
                   return DropdownMenuItem(
                     value: item,
-                    child: Row(children: [
-                      SvgPicture.asset(
-                        "assets/icons/${findIcon(item)}.svg",
-                        height: 24,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(item),
-                    ]),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/${findIcon(item)}.svg",
+                          height: 24,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(item),
+                      ],
+                    ),
                   );
                 }).toList(),
                 onChanged: (String? newValue) {

@@ -30,7 +30,7 @@ class _AddContentState extends State<AddContent> {
     DayOfWeek(title: "Sab"),
     DayOfWeek(title: "Dom"),
   ];
-  var icon = "book";
+  var icon = findIcon(list_of_disciplines[0]);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +77,18 @@ class _AddContentState extends State<AddContent> {
                 items: list_of_disciplines.map((String item) {
                   return DropdownMenuItem(
                     value: item,
-                    child: Text(item),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/${findIcon(item)}.svg",
+                          height: 24,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(item),
+                      ],
+                    ),
                   );
                 }).toList(),
                 onChanged: (String? newValue) {
