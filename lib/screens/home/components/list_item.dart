@@ -36,7 +36,7 @@ class ListItem extends StatelessWidget {
                       ),
                       Chip(
                         label: Text(
-                          (discipline.numberOfContents > 1)
+                          (discipline.numberOfContents != 1)
                               ? "${discipline.numberOfContents} conteúdos"
                               : "${discipline.numberOfContents} conteúdo",
                           style:
