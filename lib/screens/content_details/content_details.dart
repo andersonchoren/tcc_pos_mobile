@@ -1,6 +1,7 @@
 import 'package:agenda_de_estudos/model/content.dart';
 import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/repository/content_repository.dart';
+import 'package:agenda_de_estudos/screens/add_content/add_content.dart';
 import 'package:agenda_de_estudos/screens/content_details/components/list_item.dart';
 import 'package:flutter/material.dart';
 
@@ -54,6 +55,19 @@ class ContentDetails extends StatelessWidget {
             }
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: ((context) {
+                return const AddContent();
+              }),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

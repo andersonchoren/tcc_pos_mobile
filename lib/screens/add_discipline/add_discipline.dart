@@ -18,12 +18,12 @@ class _AddDisciplineState extends State<AddDiscipline> {
   var discipline = list_of_disciplines[0];
   var disciplineController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  var icon = "physic";
+  var icon = "book";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Novo conteúdo"),
+        title: const Text("Nova disciplina"),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -45,7 +45,7 @@ class _AddDisciplineState extends State<AddDiscipline> {
                   controller: disciplineController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    label: Text("Nome do conteúdo"),
+                    label: Text("Nome da disciplina"),
                   ),
                   validator: ((value) {
                     return validateDisciplineName(value!);
@@ -66,15 +66,12 @@ class _AddDisciplineState extends State<AddDiscipline> {
                   return DropdownMenuItem(
                     value: item,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
                           "assets/icons/${findIcon(item)}.svg",
                           height: 24,
                         ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(item),
                       ],
                     ),
                   );

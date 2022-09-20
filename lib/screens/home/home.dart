@@ -1,6 +1,5 @@
 import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/repository/discipline_repository.dart';
-import 'package:agenda_de_estudos/screens/add_content/add_content.dart';
 import 'package:agenda_de_estudos/screens/add_discipline/add_discipline.dart';
 import 'package:agenda_de_estudos/screens/home/components/list_item.dart';
 import 'package:flutter/material.dart';
@@ -13,21 +12,6 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Meus estudos"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: ((context) {
-                    return const AddDiscipline();
-                  }),
-                ),
-              );
-            },
-            icon: const Icon(Icons.add),
-          ),
-        ],
       ),
       body: FutureBuilder(
         future: DisciplineRepository.findAll(),
@@ -70,7 +54,7 @@ class Home extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: ((context) {
-                return const AddContent();
+                return const AddDiscipline();
               }),
             ),
           );

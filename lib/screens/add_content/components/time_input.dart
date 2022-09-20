@@ -40,7 +40,7 @@ class _TimeInputState extends State<TimeInput> {
                 if (time != null) {
                   var hour = (time.hour < 9) ? "0${time.hour}" : time.hour;
                   var minutes =
-                      (time.hour < 9) ? "0${time.minute}" : time.minute;
+                      (time.minute < 9) ? "0${time.minute}" : time.minute;
                   widget.inputController.text = "$hour:$minutes";
                 }
               },
