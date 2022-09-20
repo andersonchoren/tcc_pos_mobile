@@ -146,7 +146,7 @@ class _AddContentState extends State<AddContent> {
           );
 
           try {
-            ContentRepository.insertContent(content.toMap());
+            ContentRepository.insertContent(content.toMap(), discipline);
             var snack = const SnackBar(
                 content: Text("Conteúdo registrado com sucesso!!!"));
             ScaffoldMessenger.of(context).showSnackBar(snack);
