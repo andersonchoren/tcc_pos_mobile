@@ -28,12 +28,12 @@ class ContentRepository {
   }
 
   static Future<List<Map<String, dynamic>>> findContent(
-      Discipline discipline) async {
+      String discipline) async {
     Database database = await ActivityDAO.getConnection();
     var contents = database.query(
       _contentTable,
       where: "discipline = ?",
-      whereArgs: [discipline.name],
+      whereArgs: [discipline],
     );
     database.close();
     return contents;

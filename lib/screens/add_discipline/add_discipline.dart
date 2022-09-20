@@ -1,6 +1,7 @@
 import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/model/list_of_disciplines.dart';
 import 'package:agenda_de_estudos/repository/discipline_repository.dart';
+import 'package:agenda_de_estudos/screens/home/home.dart';
 import 'package:agenda_de_estudos/shared/find_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -94,12 +95,31 @@ class _AddDisciplineState extends State<AddDiscipline> {
 
           try {
             DisciplineRepository.insert(discipline.toMap());
-            var snack = const SnackBar(
-                content: Text("Conteúdo registrado com sucesso!!!"));
+            var snack = SnackBar(
+              content: const Text(
+                "Conteúdo registrado com sucesso!!!",
+              ),
+              action: SnackBarAction(
+                label: "Fechar",
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) {
+                        return const Home();
+                      }),
+                    ),
+                  );
+                },
+              ),
+            );
             ScaffoldMessenger.of(context).showSnackBar(snack);
           } catch (exception) {
-            var snack =
-                const SnackBar(content: Text("Houve um erro inesperado!!!"));
+            var snack = const SnackBar(
+              content: Text(
+                "Houve um erro inesperado!!!",
+              ),
+            );
             ScaffoldMessenger.of(context).showSnackBar(snack);
           }
         },

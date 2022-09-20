@@ -1,27 +1,28 @@
 import 'package:agenda_de_estudos/model/content.dart';
-import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/add_content/add_content.dart';
 import 'package:agenda_de_estudos/screens/content_details/components/list_item.dart';
 import 'package:flutter/material.dart';
 
 class ContentDetails extends StatelessWidget {
-  Discipline discipline;
+  String disciplineName;
+  String disciplineIcon;
   ContentDetails({
     super.key,
-    required this.discipline,
+    required this.disciplineName,
+    required this.disciplineIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meus estudos de ${discipline.name}"),
+        title: Text("Meus estudos de $disciplineName"),
       ),
       body: Container(
         margin: const EdgeInsets.all(16),
         child: FutureBuilder(
-          future: ContentRepository.findContent(discipline),
+          future: ContentRepository.findContent(disciplineName),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return SizedBox(
@@ -37,7 +38,7 @@ class ContentDetails extends StatelessWidget {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   return ListItem(
-                    icon: discipline.icon,
+                    icon: disciplineIcon,
                     content: Content.fromMap(snapshot.data!.elementAt(index)),
                   );
                 },
@@ -58,16 +59,13 @@ class ContentDetails extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: ((context) {
-                return AddContent(
-                  discipline: discipline.name,
-                );
-              }),
-            ),
-          );
+          Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: ((context) {
+              return AddContent(
+                discipline: disciplineName,
+              );
+            }),
+          ));
         },
         child: const Icon(Icons.add),
       ),
