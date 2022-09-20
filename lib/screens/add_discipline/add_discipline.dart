@@ -80,6 +80,7 @@ class _AddDisciplineState extends State<AddDiscipline> {
                 onChanged: (String? newValue) {
                   setState(() {
                     discipline = newValue!;
+                    icon = findIcon(newValue);
                   });
                 },
               ),
