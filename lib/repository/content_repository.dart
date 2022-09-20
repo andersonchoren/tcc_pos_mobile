@@ -19,9 +19,12 @@ class ContentRepository {
       whereArgs: [disciplineName],
     );
     var discipline = Discipline.fromMap(disciplines.first);
+    var numberOfContents = discipline.numberOfContents + 1;
     result = await database.update(
       _disciplineTable,
-      {"numberOfContents": discipline.numberOfContents + 1},
+      {"numberOfContents": numberOfContents},
+      where: "name = ?",
+      whereArgs: [disciplineName]
     );
     database.close();
     return result;

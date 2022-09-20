@@ -4,7 +4,7 @@ import 'package:agenda_de_estudos/model/form_validation.dart';
 import 'package:agenda_de_estudos/model/list_of_disciplines.dart';
 import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/add_content/components/time_input.dart';
-import 'package:agenda_de_estudos/screens/content_details/content_details.dart';
+import 'package:agenda_de_estudos/screens/home/home.dart';
 import 'package:agenda_de_estudos/shared/find_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -135,17 +135,13 @@ class _AddContentState extends State<AddContent> {
               action: SnackBarAction(
                 label: "Fechar",
                 onPressed: () {
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: ((context) {
-                        return ContentDetails(
-                          disciplineIcon: icon,
-                          disciplineName: widget.discipline,
-                        );
+                        return const Home();
                       }),
                     ),
-                    (route) => (route.isFirst) ? true : false,
                   );
                 },
               ),
