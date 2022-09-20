@@ -97,7 +97,7 @@ class _AddDisciplineState extends State<AddDiscipline> {
             DisciplineRepository.insert(discipline.toMap());
             var snack = SnackBar(
               content: const Text(
-                "Conteúdo registrado com sucesso!!!",
+                "Disciplina registrada com sucesso!!!",
               ),
               action: SnackBarAction(
                 label: "Fechar",
