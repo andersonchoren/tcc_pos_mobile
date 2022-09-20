@@ -3,12 +3,12 @@ import 'package:agenda_de_estudos/screens/content_details/components/list_item.d
 import 'package:flutter/material.dart';
 
 class ContentDetails extends StatelessWidget {
-  List<Content> contents;
+  List<Content>? contents;
   String icon;
   ContentDetails({
     super.key,
     required this.icon,
-    required this.contents,
+    this.contents,
   });
 
   @override
@@ -19,15 +19,19 @@ class ContentDetails extends StatelessWidget {
       ),
       body: Container(
         margin: const EdgeInsets.all(16),
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return ListItem(
-              icon: icon,
-              content: contents[index],
-            );
-          },
-          itemCount: contents.length,
-        ),
+        child: (contents != null)
+            ? ListView.builder(
+                itemBuilder: (context, index) {
+                  return ListItem(
+                    icon: icon,
+                    content: contents![index],
+                  );
+                },
+                itemCount: contents?.length,
+              )
+            : const Center(
+                child: Text("Não existem conteúdos"),
+              ),
       ),
     );
   }

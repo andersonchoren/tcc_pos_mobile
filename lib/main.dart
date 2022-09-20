@@ -7,7 +7,9 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Agenda de estudos",
-      home: const Home(),
+      home: Home(
+        
+      ),
       theme: ThemeData(
         colorScheme: const ColorScheme.light(
           primary: primary,

@@ -10,7 +10,9 @@ class ActivityDAO {
       version: 1,
       onCreate: (db, version) async {
         await db.execute(
-            'CREATE TABLE contents (id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT, initialHour TEXT, endHour TEXT, days TEXT)');
+            'CREATE TABLE contents (id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT, initialHour TEXT, endHour TEXT, days TEXT, discipline TEXT)');
+        await db.execute(
+            'CREATE TABLE disciplines (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,icon TEXT)');
       },
     );
     return database;

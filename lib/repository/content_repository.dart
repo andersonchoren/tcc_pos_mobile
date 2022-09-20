@@ -1,5 +1,5 @@
 import 'package:agenda_de_estudos/model/discipline.dart';
-import 'package:agenda_de_estudos/model/repository/activity_dao.dart';
+import 'package:agenda_de_estudos/repository/activity_dao.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ContentRepository {
@@ -14,7 +14,7 @@ class ContentRepository {
     return result;
   }
 
-  static Future<List<Map<String, dynamic>>> listContents(
+  static Future<List<Map<String, dynamic>>> findContent(
       Discipline discipline) async {
     Database database = await ActivityDAO.getConnection();
     var contents = database.query(

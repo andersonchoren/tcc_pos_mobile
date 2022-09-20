@@ -2,8 +2,9 @@ import 'package:agenda_de_estudos/model/content.dart';
 import 'package:agenda_de_estudos/model/day_of_week.dart';
 import 'package:agenda_de_estudos/model/form_validation.dart';
 import 'package:agenda_de_estudos/model/list_of_disciplines.dart';
-import 'package:agenda_de_estudos/model/repository/content_repository.dart';
+import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/add_content/components/time_input.dart';
+import 'package:agenda_de_estudos/shared/find_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -15,7 +16,7 @@ class AddContent extends StatefulWidget {
 }
 
 class _AddContentState extends State<AddContent> {
-  var itemSelected = list_of_disciplines[0];
+  var discipline = list_of_disciplines[0];
   var contentController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   var initialHourInput = TimeInput(title: "Inicia ás");
@@ -71,7 +72,7 @@ class _AddContentState extends State<AddContent> {
                 height: 8,
               ),
               DropdownButton(
-                value: itemSelected,
+                value: discipline,
                 isExpanded: true,
                 items: list_of_disciplines.map((String item) {
                   return DropdownMenuItem(
@@ -81,7 +82,7 @@ class _AddContentState extends State<AddContent> {
                 }).toList(),
                 onChanged: (String? newValue) {
                   setState(() {
-                    itemSelected = newValue!;
+                    discipline = newValue!;
                     icon = findIcon(newValue);
                   });
                 },
@@ -167,23 +168,4 @@ String prepareDaysOfWeek(List<DayOfWeek> daysOfWeek) {
       .toString()
       .replaceAll("(", "")
       .replaceAll(")", "");
-}
-
-String findIcon(String discipline) {
-  switch (discipline) {
-    case 'Física':
-      return 'physic';
-    case 'Geografia':
-      return 'geography';
-    case 'Matemática':
-      return 'math';
-    case 'Português':
-      return 'portuguese';
-    case 'Química':
-      return 'chemistry';
-    case 'Música':
-      return 'music';
-    default:
-      return 'book';
-  }
 }
