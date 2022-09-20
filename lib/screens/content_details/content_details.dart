@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 class ContentDetails extends StatelessWidget {
   List<Content>? contents;
   String icon;
+  String disciplineName;
   ContentDetails({
     super.key,
     required this.icon,
+    required this.disciplineName,
     this.contents,
   });
 
@@ -15,7 +17,7 @@ class ContentDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Meus estudos de química"),
+        title: Text("Meus estudos de $disciplineName"),
       ),
       body: Container(
         margin: const EdgeInsets.all(16),

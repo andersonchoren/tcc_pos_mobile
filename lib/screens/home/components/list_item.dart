@@ -62,6 +62,7 @@ class ListItem extends StatelessWidget {
                         return ContentDetails(
                           icon: discipline.icon,
                           contents: discipline.contents,
+                          disciplineName: discipline.name,
                         );
                       }),
                     ),
