@@ -2,7 +2,6 @@ import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/model/list_of_disciplines.dart';
 import 'package:agenda_de_estudos/repository/discipline_repository.dart';
 import 'package:agenda_de_estudos/screens/home/home.dart';
-import 'package:agenda_de_estudos/shared/find_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -16,10 +15,10 @@ class AddDiscipline extends StatefulWidget {
 }
 
 class _AddDisciplineState extends State<AddDiscipline> {
-  var discipline = list_of_disciplines[0];
+  var discipline = list_of_icons[0];
   var disciplineController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  var icon = "book";
+  var icon = list_of_icons[0];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,14 +62,14 @@ class _AddDisciplineState extends State<AddDiscipline> {
               DropdownButton(
                 value: discipline,
                 isExpanded: true,
-                items: list_of_disciplines.map((String item) {
+                items: list_of_icons.map((String item) {
                   return DropdownMenuItem(
                     value: item,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
-                          "assets/icons/${findIcon(item)}.svg",
+                          "assets/icons/$item.svg",
                           height: 24,
                         ),
                       ],
@@ -80,7 +79,7 @@ class _AddDisciplineState extends State<AddDiscipline> {
                 onChanged: (String? newValue) {
                   setState(() {
                     discipline = newValue!;
-                    icon = findIcon(newValue);
+                    icon = newValue;
                   });
                 },
               ),
