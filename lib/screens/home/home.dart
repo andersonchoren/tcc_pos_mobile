@@ -1,6 +1,7 @@
 import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/repository/discipline_repository.dart';
 import 'package:agenda_de_estudos/screens/add_discipline/add_discipline.dart';
+import 'package:agenda_de_estudos/screens/colors.dart';
 import 'package:agenda_de_estudos/screens/home/components/list_item.dart';
 import 'package:flutter/material.dart';
 
@@ -38,11 +39,24 @@ class Home extends StatelessWidget {
               itemCount: disciplines.length,
             );
           } else {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: const Center(
-                child: Text("Não existem disciplinas cadastradas"),
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.info,
+                    color: secondary,
+                    size: 100,
+                  ),
+                  Text(
+                    "Você ainda não possui nenhuma disciplina!",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        ?.copyWith(color: secondary),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             );
           }
