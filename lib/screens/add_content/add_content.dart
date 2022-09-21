@@ -146,8 +146,11 @@ class _AddContentState extends State<AddContent> {
             );
             ScaffoldMessenger.of(context).showSnackBar(snack);
           } catch (exception) {
-            var snack =
-                const SnackBar(content: Text("Houve um erro inesperado!!!"));
+            var snack = const SnackBar(
+              content: Text(
+                "Houve um erro inesperado!!!",
+              ),
+            );
             ScaffoldMessenger.of(context).showSnackBar(snack);
           }
         },

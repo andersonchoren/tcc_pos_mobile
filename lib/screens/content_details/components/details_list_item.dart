@@ -1,14 +1,17 @@
 import 'package:agenda_de_estudos/model/content.dart';
+import 'package:agenda_de_estudos/model/discipline.dart';
+import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/colors.dart';
+import 'package:agenda_de_estudos/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ListItem extends StatelessWidget {
-  String icon;
+class DetailsListItem extends StatelessWidget {
+  Discipline discipline;
   Content content;
-  ListItem({
+  DetailsListItem({
     super.key,
-    required this.icon,
+    required this.discipline,
     required this.content,
   });
 
@@ -25,7 +28,7 @@ class ListItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset("assets/icons/$icon.svg"),
+                    SvgPicture.asset("assets/icons/${discipline.icon}.svg"),
                     const SizedBox(
                       width: 16,
                     ),
@@ -51,7 +54,39 @@ class ListItem extends StatelessWidget {
                       width: 24,
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        var result = await ContentRepository.removeContent(
+                          content.id!,
+                          discipline.name,
+                        );
+                        if (result != 0) {
+                          var snack = SnackBar(
+                            content: const Text(
+                              "Conteúdo removido com sucesso!!!",
+                            ),
+                            action: SnackBarAction(
+                              label: "Fechar",
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: ((context) {
+                                      return const Home();
+                                    }),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snack);
+                        } else {
+                          var snack = const SnackBar(
+                            content: Text(
+                                "Lamento, não foi possível remover o conteúdo!!!"),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snack);
+                        }
+                      },
                       icon: Icon(
                         Icons.delete,
                         color: Theme.of(context).colorScheme.primary,

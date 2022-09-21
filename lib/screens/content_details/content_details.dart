@@ -1,28 +1,27 @@
 import 'package:agenda_de_estudos/model/content.dart';
+import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/add_content/add_content.dart';
-import 'package:agenda_de_estudos/screens/content_details/components/list_item.dart';
+import 'package:agenda_de_estudos/screens/content_details/components/details_list_item.dart';
 import 'package:flutter/material.dart';
 
 class ContentDetails extends StatelessWidget {
-  String disciplineName;
-  String disciplineIcon;
+  Discipline discipline;
   ContentDetails({
     super.key,
-    required this.disciplineName,
-    required this.disciplineIcon,
+    required this.discipline,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meus estudos de $disciplineName"),
+        title: Text("Meus estudos de ${discipline.name}"),
       ),
       body: Container(
         margin: const EdgeInsets.all(16),
         child: FutureBuilder(
-          future: ContentRepository.findContent(disciplineName),
+          future: ContentRepository.findContent(discipline.name),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return SizedBox(
@@ -37,8 +36,8 @@ class ContentDetails extends StatelessWidget {
             if (snapshot.data != null && snapshot.data!.isNotEmpty) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  return ListItem(
-                    icon: disciplineIcon,
+                  return DetailsListItem(
+                    discipline: discipline,
                     content: Content.fromMap(snapshot.data!.elementAt(index)),
                   );
                 },
@@ -62,7 +61,7 @@ class ContentDetails extends StatelessWidget {
           Navigator.pushReplacement(context, MaterialPageRoute(
             builder: ((context) {
               return AddContent(
-                discipline: disciplineName,
+                discipline: discipline.name,
               );
             }),
           ));

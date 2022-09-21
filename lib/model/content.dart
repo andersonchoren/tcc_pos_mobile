@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Content {
+  int? id;
   String title;
   String days;
   String initialHour;
   String endHour;
   String discipline;
   Content({
+    this.id,
     required this.title,
     required this.days,
     required this.initialHour,
@@ -15,6 +19,7 @@ class Content {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'title': title,
       'days': days,
       'initialHour': initialHour,
@@ -25,6 +30,7 @@ class Content {
 
   factory Content.fromMap(Map<String, dynamic> map) {
     return Content(
+      id: map['id'] != null ? map['id'] as int : null,
       title: map['title'] as String,
       days: map['days'] as String,
       initialHour: map['initialHour'] as String,

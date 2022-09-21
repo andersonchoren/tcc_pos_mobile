@@ -60,8 +60,7 @@ class ListItem extends StatelessWidget {
                     MaterialPageRoute(
                       builder: ((context) {
                         return ContentDetails(
-                          disciplineName: discipline.name,
-                          disciplineIcon: discipline.icon,
+                          discipline: discipline,
                         );
                       }),
                     ),
