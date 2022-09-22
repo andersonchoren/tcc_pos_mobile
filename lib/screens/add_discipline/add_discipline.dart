@@ -1,7 +1,6 @@
 import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/model/list_of_disciplines.dart';
 import 'package:agenda_de_estudos/repository/discipline_repository.dart';
-import 'package:agenda_de_estudos/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -97,19 +96,6 @@ class _AddDisciplineState extends State<AddDiscipline> {
             var snack = SnackBar(
               content: const Text(
                 "Disciplina registrada com sucesso!!!",
-              ),
-              action: SnackBarAction(
-                label: "Fechar",
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) {
-                        return const Home();
-                      }),
-                    ),
-                  );
-                },
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snack);

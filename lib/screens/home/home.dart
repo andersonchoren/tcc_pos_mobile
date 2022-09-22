@@ -5,75 +5,55 @@ import 'package:agenda_de_estudos/screens/colors.dart';
 import 'package:agenda_de_estudos/screens/home/components/list_item.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Home extends StatefulWidget {
+  List<Discipline> disciplines;
+  Home({
+    super.key,
+    required this.disciplines,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Meus estudos"),
-      ),
-      body: FutureBuilder(
-        future: DisciplineRepository.findAll(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
+  State<Home> createState() => _HomeState();
+}
 
-          if (snapshot.data != null && snapshot.data!.isNotEmpty) {
-            var disciplines =
-                snapshot.data!.map((item) => Discipline.fromMap(item)).toList();
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                return ListItem(
-                  discipline: disciplines[index],
-                );
-              },
-              itemCount: disciplines.length,
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        var result = await DisciplineRepository.findAll();
+        widget.disciplines = result
+            .map(
+              (e) => Discipline.fromMap(e),
+            )
+            .toList();
+        setState(() {});
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Meus estudos"),
+        ),
+        body: ListView.builder(
+          itemBuilder: (context, index) {
+            return ListItem(
+              discipline: widget.disciplines[index],
             );
-          } else {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.info,
-                    color: secondary,
-                    size: 100,
-                  ),
-                  Text(
-                    "Você ainda não possui nenhuma disciplina!",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        ?.copyWith(color: secondary),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+          },
+          itemCount: widget.disciplines.length,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: ((context) {
+                  return const AddDiscipline();
+                }),
               ),
             );
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: ((context) {
-                return const AddDiscipline();
-              }),
-            ),
-          );
-        },
-        child: const Icon(Icons.add),
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }

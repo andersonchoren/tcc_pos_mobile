@@ -3,7 +3,6 @@ import 'package:agenda_de_estudos/model/day_of_week.dart';
 import 'package:agenda_de_estudos/model/form_validation.dart';
 import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/add_content/components/time_input.dart';
-import 'package:agenda_de_estudos/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -129,19 +128,6 @@ class _AddContentState extends State<AddContent> {
             var snack = SnackBar(
               content: const Text(
                 "Conteúdo registrado com sucesso!!!",
-              ),
-              action: SnackBarAction(
-                label: "Fechar",
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) {
-                        return const Home();
-                      }),
-                    ),
-                  );
-                },
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snack);
