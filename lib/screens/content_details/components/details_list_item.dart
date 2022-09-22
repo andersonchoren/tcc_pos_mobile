@@ -4,6 +4,7 @@ import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/colors.dart';
 import 'package:agenda_de_estudos/screens/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_alarm_clock/flutter_alarm_clock.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DetailsListItem extends StatelessWidget {
@@ -44,7 +45,45 @@ class DetailsListItem extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        var time = content.initialHour.split(":");
+                        bool skip = true;
+                        await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text(
+                                "Configuração do alerta",
+                              ),
+                              content: const Text(
+                                "Você deseja configurar seu alarme?",
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    skip = false;
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Sim"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Não"),
+                                )
+                              ],
+                            );
+                          },
+                        );
+
+                        setAlarm(
+                          title: content.title,
+                          hour: int.parse(time[0]),
+                          minute: int.parse(time[1]),
+                          skip: skip,
+                        );
+                      },
                       icon: Icon(
                         Icons.add_alert,
                         color: Theme.of(context).colorScheme.primary,
@@ -63,19 +102,6 @@ class DetailsListItem extends StatelessWidget {
                           var snack = SnackBar(
                             content: const Text(
                               "Conteúdo removido com sucesso!!!",
-                            ),
-                            action: SnackBarAction(
-                              label: "Fechar",
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: ((context) {
-                                      return const Home();
-                                    }),
-                                  ),
-                                );
-                              },
                             ),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snack);
@@ -135,6 +161,20 @@ class DetailsListItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void setAlarm({
+    required String title,
+    required int hour,
+    required int minute,
+    required bool skip,
+  }) {
+    FlutterAlarmClock.createAlarm(
+      title: "Rotina de estudos: $title",
+      hour,
+      minute,
+      skipUi: skip,
     );
   }
 }
