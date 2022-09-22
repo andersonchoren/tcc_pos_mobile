@@ -8,6 +8,7 @@ var list_of_icons = [
   'chemistry',
   'music',
   'book',
+  'code',
 ];
 
 var list_of_disciplines = [
@@ -16,4 +17,5 @@ var list_of_disciplines = [
   Discipline(name: 'Matemática', icon: 'math'),
   Discipline(name: 'Português', icon: 'portuguese'),
   Discipline(name: 'Química', icon: 'chemistry'),
+  Discipline(name: 'Programação de sistemas', icon: 'code'),
 ];
