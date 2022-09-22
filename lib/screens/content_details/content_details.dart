@@ -6,7 +6,7 @@ import 'package:agenda_de_estudos/screens/colors.dart';
 import 'package:agenda_de_estudos/screens/content_details/components/details_list_item.dart';
 import 'package:flutter/material.dart';
 
-class ContentDetails extends StatelessWidget {
+class ContentDetails extends StatefulWidget {
   Discipline discipline;
   ContentDetails({
     super.key,
@@ -14,15 +14,20 @@ class ContentDetails extends StatelessWidget {
   });
 
   @override
+  State<ContentDetails> createState() => _ContentDetailsState();
+}
+
+class _ContentDetailsState extends State<ContentDetails> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meus estudos em ${discipline.name}"),
+        title: Text("Meus estudos em ${widget.discipline.name}"),
       ),
       body: Container(
         margin: const EdgeInsets.all(16),
         child: FutureBuilder(
-          future: ContentRepository.findContent(discipline.name),
+          future: ContentRepository.findContent(widget.discipline.name),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return SizedBox(
@@ -35,14 +40,22 @@ class ContentDetails extends StatelessWidget {
             }
 
             if (snapshot.data != null && snapshot.data!.isNotEmpty) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return DetailsListItem(
-                    discipline: discipline,
-                    content: Content.fromMap(snapshot.data!.elementAt(index)),
-                  );
+              var contents = snapshot.data!;
+              return RefreshIndicator(
+                onRefresh: () async {
+                  setState(() {});
                 },
-                itemCount: snapshot.data!.length,
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return DetailsListItem(
+                      discipline: widget.discipline,
+                      content: Content.fromMap(
+                        contents.elementAt(index),
+                      ),
+                    );
+                  },
+                  itemCount: contents.length,
+                ),
               );
             } else {
               return Center(
@@ -74,7 +87,7 @@ class ContentDetails extends StatelessWidget {
           Navigator.pushReplacement(context, MaterialPageRoute(
             builder: ((context) {
               return AddContent(
-                discipline: discipline.name,
+                discipline: widget.discipline.name,
               );
             }),
           ));
