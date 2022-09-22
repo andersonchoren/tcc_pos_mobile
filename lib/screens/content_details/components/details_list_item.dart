@@ -2,7 +2,6 @@ import 'package:agenda_de_estudos/model/content.dart';
 import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/colors.dart';
-import 'package:agenda_de_estudos/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_alarm_clock/flutter_alarm_clock.dart';
 import 'package:flutter_svg/svg.dart';
