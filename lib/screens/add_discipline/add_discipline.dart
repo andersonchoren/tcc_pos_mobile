@@ -1,5 +1,5 @@
 import 'package:agenda_de_estudos/model/discipline.dart';
-import 'package:agenda_de_estudos/model/list_of_disciplines.dart';
+import 'package:agenda_de_estudos/utils/lists.dart';
 import 'package:agenda_de_estudos/repository/discipline_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
