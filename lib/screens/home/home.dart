@@ -3,6 +3,7 @@ import 'package:agenda_de_estudos/repository/discipline_repository.dart';
 import 'package:agenda_de_estudos/screens/add_discipline/add_discipline.dart';
 import 'package:agenda_de_estudos/screens/home/components/list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class Home extends StatefulWidget {
   List<Discipline> disciplines;
@@ -20,7 +21,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Meus estudos"),
+        title: Text(
+          translate("home.appbar.title"),
+        ),
       ),
       body: ListOfDisciplines(),
       floatingActionButton: FloatingActionButton(

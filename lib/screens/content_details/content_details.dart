@@ -5,6 +5,7 @@ import 'package:agenda_de_estudos/screens/add_content/add_content.dart';
 import 'package:agenda_de_estudos/screens/colors.dart';
 import 'package:agenda_de_estudos/screens/content_details/components/details_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class ContentDetails extends StatefulWidget {
   Discipline discipline;
@@ -22,7 +23,8 @@ class _ContentDetailsState extends State<ContentDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meus estudos em ${widget.discipline.name}"),
+        title: Text(
+            "${translate("content_details.appbar.title")} ${widget.discipline.name}"),
       ),
       body: Container(
         margin: const EdgeInsets.all(16),
@@ -68,7 +70,7 @@ class _ContentDetailsState extends State<ContentDetails> {
                       size: 100,
                     ),
                     Text(
-                      "Você ainda não possui nenhum conteúdo para essa disciplina!",
+                      translate("content_details.empty_content"),
                       style: Theme.of(context)
                           .textTheme
                           .headline5
@@ -84,13 +86,16 @@ class _ContentDetailsState extends State<ContentDetails> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: ((context) {
-              return AddContent(
-                discipline: widget.discipline.name,
-              );
-            }),
-          ));
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: ((context) {
+                return AddContent(
+                  discipline: widget.discipline.name,
+                );
+              }),
+            ),
+          );
         },
         child: const Icon(Icons.add),
       ),

@@ -5,6 +5,7 @@ import 'package:agenda_de_estudos/repository/content_repository.dart';
 import 'package:agenda_de_estudos/screens/add_content/components/time_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class AddContent extends StatefulWidget {
   String discipline;
@@ -20,23 +21,29 @@ class AddContent extends StatefulWidget {
 class _AddContentState extends State<AddContent> {
   var contentController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  var initialHourInput = TimeInput(title: "Inicia ás");
-  var endHourInput = TimeInput(title: "Termina ás");
+  var initialHourInput = TimeInput(
+    title: translate("add_content.starts_ace"),
+  );
+  var endHourInput = TimeInput(
+    title: translate("add_content.end_ace"),
+  );
   var checkboxs = [
-    DayOfWeek(title: "Seg"),
-    DayOfWeek(title: "Ter"),
-    DayOfWeek(title: "Qua"),
-    DayOfWeek(title: "Qui"),
-    DayOfWeek(title: "Sex"),
-    DayOfWeek(title: "Sab"),
-    DayOfWeek(title: "Dom"),
+    DayOfWeek(title: translate("days_of_week.mon")),
+    DayOfWeek(title: translate("days_of_week.tue")),
+    DayOfWeek(title: translate("days_of_week.wed")),
+    DayOfWeek(title: translate("days_of_week.thu")),
+    DayOfWeek(title: translate("days_of_week.fri")),
+    DayOfWeek(title: translate("days_of_week.sat")),
+    DayOfWeek(title: translate("days_of_week.sun")),
   ];
   var icon = "book";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Novo conteúdo"),
+        title: Text(
+          translate("add_content.appbar.title"),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -56,9 +63,11 @@ class _AddContentState extends State<AddContent> {
                 child: TextFormField(
                   key: formKey,
                   controller: contentController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    label: Text("Nome do conteúdo"),
+                    label: Text(
+                      translate("add_content.content_name_label"),
+                    ),
                   ),
                   validator: ((value) {
                     return validateContentName(value!);
@@ -72,9 +81,11 @@ class _AddContentState extends State<AddContent> {
                 child: initialHourInput,
               ),
               endHourInput,
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 16, bottom: 8),
-                child: Text("Dias da semana"),
+                child: Text(
+                  translate("add_content.days_of_week_label"),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 90),
@@ -126,15 +137,15 @@ class _AddContentState extends State<AddContent> {
           try {
             ContentRepository.insertContent(content.toMap(), widget.discipline);
             var snack = SnackBar(
-              content: const Text(
-                "Conteúdo registrado com sucesso!!!",
+              content: Text(
+                translate("add_content.content_save_success"),
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snack);
           } catch (exception) {
-            var snack = const SnackBar(
+            var snack = SnackBar(
               content: Text(
-                "Houve um erro inesperado!!!",
+                translate("error"),
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snack);

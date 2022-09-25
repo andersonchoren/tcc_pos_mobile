@@ -1,0 +1,60 @@
+{
+  "error": "There was an unexpected error!!!",
+  "home": {
+    "appbar": {
+      "title": "My Studies"
+    },
+    "list_item": {
+      "contents": "contents",
+      "content": "content"
+    }
+  },
+  "add_discipline": {
+    "appbar": {
+      "title": "New discipline"
+    },
+    "subject_name": "Subject name",
+    "icon": "icon",
+    "discipline_save_success": "Subject successfully registered!!!"
+  },
+  "add_content": {
+    "starts_ace": "starts ace",
+    "end_ace": "end ace",
+    "appbar": {
+      "title": "New content"
+    },
+    "content_name_label": "Content name",
+    "days_of_week_label": "Days of week",
+    "content_save_success": "Content successfully registered!!!"
+  },
+  "details_list_item": {
+    "alert": {
+      "title": "Alert configuration",
+      "content": "Do you want to configure your alarm?",
+      "button": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "content_remove_success": "Content successfully removed!!!",
+    "content_remove_fail": "Sorry, could not remove content!!!",
+    "time": {
+      "first": "From",
+      "last": "to"
+    },
+    "alarm_title": "Study routine"
+  },
+  "content_details": {
+    "appbar": { "title": "My studies in" },
+    "empty_content": "You don't have any content for this course yet!!!"
+  },
+  "days_of_week": {
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun"
+  }
+}

@@ -3,6 +3,7 @@ import 'package:agenda_de_estudos/utils/lists.dart';
 import 'package:agenda_de_estudos/repository/discipline_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../model/form_validation.dart';
 
@@ -22,7 +23,7 @@ class _AddDisciplineState extends State<AddDiscipline> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Nova disciplina"),
+        title: Text(translate("add_discipline.appbar.title")),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -42,18 +43,22 @@ class _AddDisciplineState extends State<AddDiscipline> {
                 child: TextFormField(
                   key: formKey,
                   controller: disciplineController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    label: Text("Nome da disciplina"),
+                    label: Text(
+                      translate("add_discipline.subject_name"),
+                    ),
                   ),
                   validator: ((value) {
                     return validateDisciplineName(value!);
                   }),
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 16, bottom: 8),
-                child: Text("Ícone"),
+                child: Text(
+                  translate("add_discipline.icon"),
+                ),
               ),
               const SizedBox(
                 height: 8,
@@ -94,15 +99,15 @@ class _AddDisciplineState extends State<AddDiscipline> {
           try {
             DisciplineRepository.insert(discipline.toMap());
             var snack = SnackBar(
-              content: const Text(
-                "Disciplina registrada com sucesso!!!",
+              content: Text(
+                translate("add_discipline.discipline_save_success"),
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snack);
           } catch (exception) {
-            var snack = const SnackBar(
+            var snack = SnackBar(
               content: Text(
-                "Houve um erro inesperado!!!",
+                translate("error"),
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snack);

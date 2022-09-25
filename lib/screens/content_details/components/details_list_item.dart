@@ -5,6 +5,7 @@ import 'package:agenda_de_estudos/screens/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_alarm_clock/flutter_alarm_clock.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class DetailsListItem extends StatelessWidget {
   Discipline discipline;
@@ -51,11 +52,15 @@ class DetailsListItem extends StatelessWidget {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text(
-                                "Configuração do alerta",
+                              title: Text(
+                                translate(
+                                  "details_list_item.alert.title",
+                                ),
                               ),
-                              content: const Text(
-                                "Você deseja configurar seu alarme?",
+                              content: Text(
+                                translate(
+                                  "details_list_item.alert.content",
+                                ),
                               ),
                               actions: [
                                 TextButton(
@@ -63,13 +68,21 @@ class DetailsListItem extends StatelessWidget {
                                     skip = false;
                                     Navigator.pop(context);
                                   },
-                                  child: const Text("Sim"),
+                                  child: Text(
+                                    translate(
+                                      "details_list_item.alert.button.yes",
+                                    ),
+                                  ),
                                 ),
                                 TextButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: const Text("Não"),
+                                  child: Text(
+                                    translate(
+                                      "details_list_item.alert.button.no",
+                                    ),
+                                  ),
                                 )
                               ],
                             );
@@ -99,15 +112,20 @@ class DetailsListItem extends StatelessWidget {
                         );
                         if (result != 0) {
                           var snack = SnackBar(
-                            content: const Text(
-                              "Conteúdo removido com sucesso!!!",
+                            content: Text(
+                              translate(
+                                "details_list_item.content_remove_success",
+                              ),
                             ),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snack);
                         } else {
-                          var snack = const SnackBar(
+                          var snack = SnackBar(
                             content: Text(
-                                "Lamento, não foi possível remover o conteúdo!!!"),
+                              translate(
+                                "details_list_item.content_remove_fail",
+                              ),
+                            ),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snack);
                         }
@@ -151,7 +169,11 @@ class DetailsListItem extends StatelessWidget {
                       width: 8,
                     ),
                     Text(
-                      "Das ${content.initialHour} até às ${content.endHour} ",
+                      "${translate(
+                        "details_list_item.time.first",
+                      )} ${content.initialHour} ${translate(
+                        "details_list_item.time.last",
+                      )} ${content.endHour}",
                     ),
                   ],
                 ),
@@ -170,7 +192,9 @@ class DetailsListItem extends StatelessWidget {
     required bool skip,
   }) {
     FlutterAlarmClock.createAlarm(
-      title: "Rotina de estudos: $title",
+      title: "${translate(
+        "details_list_item.alarm_title",
+      )}: $title",
       hour,
       minute,
       skipUi: skip,

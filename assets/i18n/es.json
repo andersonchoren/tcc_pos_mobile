@@ -1,0 +1,60 @@
+{
+  "error": "Hubo un error inesperado!!!",
+  "home": {
+    "appbar": {
+      "title": "Mis estudios"
+    },
+    "list_item": {
+      "contents": "contenido",
+      "content": "contenido"
+    }
+  },
+  "add_discipline": {
+    "appbar": {
+      "title": "nueva disciplina"
+    },
+    "subject_name": "Nombre del tema",
+    "icon": "icono",
+    "discipline_save_success": "Sujeto registrado con éxito!!!"
+  },
+  "add_content": {
+    "starts_ace": "Empieza en",
+    "end_ace": "terminar en",
+    "appbar": {
+      "title": "Nuevo contenido"
+    },
+    "content_name_label": "Nombre del contenido",
+    "days_of_week_label": "Días de la semana",
+    "content_save_success": "Contenido registrado correctamente!!!"
+  },
+  "details_list_item": {
+    "alert": {
+      "title": "Configuración de alertas",
+      "content": "¿Quieres configurar tu alarma?",
+      "button": {
+        "yes": "Si",
+        "no": "No"
+      }
+    },
+    "content_remove_success": "¡¡¡Contenido eliminado con éxito!!!",
+    "content_remove_fail": "Lo siento, no se pudo eliminar el contenido!!!",
+    "time": {
+      "first": "De",
+      "last": "a"
+    },
+    "alarm_title": "Rutina de estudio"
+  },
+  "content_details": {
+    "appbar": { "title": "mis estudios en " },
+    "empty_content": "Aún no tienes ningún contenido para este curso!!!"
+  },
+  "days_of_week": {
+    "mon": "Lun",
+    "tue": "Mar",
+    "wed": "Mié",
+    "thu": "Jue",
+    "fri": "Vie",
+    "sat": "Sab",
+    "sun": "Dom"
+  }
+}

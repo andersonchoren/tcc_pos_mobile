@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.andersonchoren.agenda_de_estudos">
+    package="br.com.andersonchoren.tcc_pos_mobile">
    <application
-        android:label="agenda_de_estudos"
+        android:label="tcc_pos_mobile"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
