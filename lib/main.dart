@@ -11,11 +11,7 @@ void main() async {
   var disciplines = await DisciplineRepository.findAll();
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',
-    supportedLocales: [
-      'en_US',
-      'pt',
-      'es'
-    ],
+    supportedLocales: ['en_US', 'pt', 'es'],
   );
   runApp(
     LocalizedApp(
@@ -40,7 +36,7 @@ class App extends StatelessWidget {
       state: LocalizationProvider.of(context).state,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "Agenda de estudos",
+        title: "OrganoEstudos",
         home: Home(
           disciplines: disciplines
               .map(
