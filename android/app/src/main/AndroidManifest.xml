@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.andersonchoren.tcc_pos_mobile">
    <application
-        android:label="tcc_pos_mobile"
-        android:name="OrganoEstudos"
+        android:label="OrganoEstudos"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
