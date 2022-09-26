@@ -1,5 +1,8 @@
 {
   "error": "There was an unexpected error!!!",
+  "form": {
+    "empty_input": "The field cannot be blank"
+  },
   "home": {
     "appbar": {
       "title": "My Studies"

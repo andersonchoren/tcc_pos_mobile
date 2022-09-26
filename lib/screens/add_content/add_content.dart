@@ -20,7 +20,7 @@ class AddContent extends StatefulWidget {
 
 class _AddContentState extends State<AddContent> {
   var contentController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  var _formKey = GlobalKey<FormState>();
   var initialHourInput = TimeInput(
     title: translate("add_content.starts_ace"),
   );
@@ -49,106 +49,114 @@ class _AddContentState extends State<AddContent> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           margin: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                child: SvgPicture.asset(
-                  "assets/icons/$icon.svg",
-                  height: 80,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  child: SvgPicture.asset(
+                    "assets/icons/$icon.svg",
+                    height: 80,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: TextFormField(
-                  key: formKey,
-                  controller: contentController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text(
-                      translate("add_content.content_name_label"),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: TextFormField(
+                    controller: contentController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text(
+                        translate("add_content.content_name_label"),
+                      ),
+                    ),
+                    validator: ((value) {
+                      return validateContentEmpty(
+                        value!,
+                        translate("form.empty_input"),
+                      );
+                    }),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                  ),
+                  child: initialHourInput,
+                ),
+                endHourInput,
+                Padding(
+                  padding: EdgeInsets.only(top: 16, bottom: 8),
+                  child: Text(
+                    translate("add_content.days_of_week_label"),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 90),
+                  child: SizedBox(
+                    height: 80,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Checkbox(
+                              value: checkboxs[index].isActive,
+                              onChanged: (value) {
+                                setState(() {
+                                  checkboxs[index].isActive = value!;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  checkboxs[index].isActive =
+                                      !checkboxs[index].isActive;
+                                });
+                              },
+                              child: Text(checkboxs[index].title),
+                            ),
+                          ],
+                        );
+                      },
+                      itemCount: checkboxs.length,
                     ),
                   ),
-                  validator: ((value) {
-                    return validateContentName(value!);
-                  }),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                ),
-                child: initialHourInput,
-              ),
-              endHourInput,
-              Padding(
-                padding: EdgeInsets.only(top: 16, bottom: 8),
-                child: Text(
-                  translate("add_content.days_of_week_label"),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 90),
-                child: SizedBox(
-                  height: 80,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          Checkbox(
-                            value: checkboxs[index].isActive,
-                            onChanged: (value) {
-                              setState(() {
-                                checkboxs[index].isActive = value!;
-                              });
-                            },
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                checkboxs[index].isActive =
-                                    !checkboxs[index].isActive;
-                              });
-                            },
-                            child: Text(checkboxs[index].title),
-                          ),
-                        ],
-                      );
-                    },
-                    itemCount: checkboxs.length,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          var content = Content(
-            title: contentController.text,
-            days: prepareDaysOfWeek(checkboxs),
-            initialHour: initialHourInput.inputController.text,
-            endHour: endHourInput.inputController.text,
-            discipline: widget.discipline,
-          );
+          if (_formKey.currentState!.validate()) {
+            var content = Content(
+              title: contentController.text,
+              days: prepareDaysOfWeek(checkboxs),
+              initialHour: initialHourInput.inputController.text,
+              endHour: endHourInput.inputController.text,
+              discipline: widget.discipline,
+            );
 
-          try {
-            ContentRepository.insertContent(content.toMap(), widget.discipline);
-            var snack = SnackBar(
-              content: Text(
-                translate("add_content.content_save_success"),
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snack);
-          } catch (exception) {
-            var snack = SnackBar(
-              content: Text(
-                translate("error"),
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snack);
+            try {
+              ContentRepository.insertContent(
+                  content.toMap(), widget.discipline);
+              var snack = SnackBar(
+                content: Text(
+                  translate("add_content.content_save_success"),
+                ),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snack);
+            } catch (exception) {
+              var snack = SnackBar(
+                content: Text(
+                  translate("error"),
+                ),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snack);
+            }
           }
         },
         child: const Icon(Icons.save),

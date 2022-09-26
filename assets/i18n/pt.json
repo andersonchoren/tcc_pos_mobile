@@ -1,5 +1,8 @@
 {
   "error": "Houve um erro inesperado!!!",
+  "form": {
+    "empty_input": "O campo não pode ficar em branco"
+  },
   "home": {
     "appbar": {
       "title": "Meus estudos"
