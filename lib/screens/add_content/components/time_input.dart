@@ -1,8 +1,11 @@
+import 'package:agenda_de_estudos/model/form_validation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class TimeInput extends StatefulWidget {
   String title;
-  final inputController = TextEditingController();
+  final inputController = MaskedTextController(mask: "00:00");
   TimeInput({
     super.key,
     required this.title,
@@ -27,7 +30,10 @@ class _TimeInputState extends State<TimeInput> {
             Expanded(
               child: TextFormField(
                 controller: widget.inputController,
-                enabled: false,
+                validator: (value) => validateContentEmpty(
+                  value!,
+                  translate("form.empty_input"),
+                ),
               ),
             ),
             IconButton(

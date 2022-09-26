@@ -41,6 +41,7 @@ dependencies:
   sqflite: ^2.1.0
   flutter_alarm_clock: ^0.0.2
   flutter_translate: ^4.0.3
+  flutter_masked_text2: ^0.9.1
 
 dev_dependencies:
   flutter_test:
