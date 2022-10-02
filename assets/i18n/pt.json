@@ -49,7 +49,7 @@
   },
   "content_details": {
     "appbar": { "title": "Meus estudos em" },
-    "empty_content": "Você ainda não tem conteúdo para este curso!!!"
+    "empty_content": "Você ainda não possui nenhum conteúdo para essa disciplina!"
   },
   "days_of_week": {
     "mon": "Seg",
