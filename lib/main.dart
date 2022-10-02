@@ -2,6 +2,7 @@ import 'package:agenda_de_estudos/model/discipline.dart';
 import 'package:agenda_de_estudos/repository/discipline_repository.dart';
 import 'package:agenda_de_estudos/screens/colors.dart';
 import 'package:agenda_de_estudos/screens/home/home.dart';
+import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -37,12 +38,17 @@ class App extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "OrganoEstudos",
-        home: Home(
-          disciplines: disciplines
-              .map(
-                (e) => Discipline.fromMap(e),
-              )
-              .toList(),
+        home: EasySplashScreen(
+          logo: Image.asset("assets/splash.png"),
+          logoWidth: 100,
+          loaderColor: secondary,
+          navigator: Home(
+            disciplines: disciplines
+                .map(
+                  (e) => Discipline.fromMap(e),
+                )
+                .toList(),
+          ),
         ),
         theme: ThemeData(
           colorScheme: const ColorScheme.light(
