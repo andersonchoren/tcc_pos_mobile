@@ -1,7 +1,8 @@
 {
   "error": "Hubo un error inesperado!!!",
   "form": {
-    "empty_input": "El campo no puede estar en blanco"
+    "empty_input": "El campo no puede estar en blanco",
+    "time_input": "El formato de hora no es válido!!!"
   },
   "remove_alert": {
     "title": "¿Está seguro de que desea eliminar este registro?",

@@ -30,9 +30,9 @@ class _TimeInputState extends State<TimeInput> {
             Expanded(
               child: TextFormField(
                 controller: widget.inputController,
-                validator: (value) => validateContentEmpty(
+                validator: (value) => validateTimeInput(
                   value!,
-                  translate("form.empty_input"),
+                  translate("form.time_input"),
                 ),
               ),
             ),

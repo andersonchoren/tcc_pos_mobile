@@ -1,7 +1,8 @@
 {
   "error": "There was an unexpected error!!!",
   "form": {
-    "empty_input": "The field cannot be blank"
+    "empty_input": "The field cannot be blank",
+    "time_input": "The time format is invalid!!!"
   },
   "remove_alert": {
     "title": "Are you sure you want to remove this record?",
