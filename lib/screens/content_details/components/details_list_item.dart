@@ -106,29 +106,7 @@ class DetailsListItem extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () async {
-                        var result = await ContentRepository.removeContent(
-                          content.id!,
-                          discipline.name,
-                        );
-                        if (result != 0) {
-                          var snack = SnackBar(
-                            content: Text(
-                              translate(
-                                "details_list_item.content_remove_success",
-                              ),
-                            ),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snack);
-                        } else {
-                          var snack = SnackBar(
-                            content: Text(
-                              translate(
-                                "details_list_item.content_remove_fail",
-                              ),
-                            ),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snack);
-                        }
+                        await removeDialog(context);
                       },
                       icon: Icon(
                         Icons.delete,
@@ -182,6 +160,78 @@ class DetailsListItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> removeDialog(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            translate(
+              "remove_alert.title",
+            ),
+          ),
+          content: Text(
+            translate(
+              "remove_alert.content",
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                translate(
+                  "remove_alert.cancel_button",
+                ),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+              child: Text(
+                translate(
+                  "remove_alert.confirm_button",
+                ),
+              ),
+              onPressed: () async {
+                int result = await removeContent();
+                if (result != 0) {
+                  var snack = SnackBar(
+                    content: Text(
+                      translate(
+                        "details_list_item.content_remove_success",
+                      ),
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snack);
+                } else {
+                  var snack = SnackBar(
+                    content: Text(
+                      translate(
+                        "details_list_item.content_remove_fail",
+                      ),
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snack);
+                }
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<int> removeContent() async {
+    return await ContentRepository.removeContent(
+      content.id!,
+      discipline.name,
     );
   }
 

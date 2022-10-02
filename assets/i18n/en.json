@@ -3,6 +3,12 @@
   "form": {
     "empty_input": "The field cannot be blank"
   },
+  "remove_alert": {
+    "title": "Are you sure you want to remove this record?",
+    "content": "This action cannot be reversed!!!",
+    "cancel_button": "CANCEL",
+    "confirm_button": "REMOVE"
+  },
   "home": {
     "appbar": {
       "title": "My Studies"

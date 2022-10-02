@@ -3,6 +3,12 @@
   "form": {
     "empty_input": "El campo no puede estar en blanco"
   },
+  "remove_alert": {
+    "title": "¿Está seguro de que desea eliminar este registro?",
+    "content": "Esta acción no se puede revertir!!!",
+    "cancel_button": "CANCELAR",
+    "confirm_button": "ELIMINAR"
+  },
   "home": {
     "appbar": {
       "title": "Mis estudios"
